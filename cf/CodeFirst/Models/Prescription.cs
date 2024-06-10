@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirst.Models;
 
-[Table("books")]
-public class Book
+[Table("Prescription")]
+public class Prescription
 {
     [Key]
     public int Id { get; set; }
@@ -15,9 +15,9 @@ public class Book
     public double Price { get; set; }
     public int TotalPages { get; set; }
 
-    public ICollection<Author> Authors { get; set; } = new HashSet<Author>();
+    public ICollection<Patient> Authors { get; set; } = new HashSet<Patient>();
     
-    public ICollection<Edition> Editions { get; set; } = new HashSet<Edition>();
+    public ICollection<Doctor> Editions { get; set; } = new HashSet<Doctor>();
     
-    public ICollection<BookAward> BookAwards { get; set; } = new HashSet<BookAward>();
+    public ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = new HashSet<PrescriptionMedicament>();
 }

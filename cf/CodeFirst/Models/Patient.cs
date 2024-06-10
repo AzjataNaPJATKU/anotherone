@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CodeFirst.Models;
 
-[Table("authors")]
-public class Author
+[Table("Patient")]
+public class Patient
 {
     [Key]
     public int Id { get; set; }
@@ -13,5 +13,5 @@ public class Author
     [MaxLength(100)]
     public string LastName { get; set; } = string.Empty;
     
-    public ICollection<Book> Books { get; set; } = new HashSet<Book>();
+    public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
 }
