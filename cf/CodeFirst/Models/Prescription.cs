@@ -9,11 +9,10 @@ public class Prescription
 {
     [Key]
     public int Id { get; set; }
-    [MaxLength(100)]
-    public string Title { get; set; } = string.Empty;
-    [Precision(3)]
-    public double Price { get; set; }
-    public int TotalPages { get; set; }
+    public DateOnly Date { get; set; } 
+    public DateOnly DueDate { get; set; }
+    public int idPatient { get; set; }
+    public int idDoctor { get; set; }
 
     public ICollection<Patient> Authors { get; set; } = new HashSet<Patient>();
     

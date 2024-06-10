@@ -12,6 +12,8 @@ public class Patient
     public string FirstName { get; set; } = string.Empty;
     [MaxLength(100)]
     public string LastName { get; set; } = string.Empty;
-    
+
+    public DateOnly BirthDate { get; set; }
+
     public ICollection<Prescription> Prescriptions { get; set; } = new HashSet<Prescription>();
 }

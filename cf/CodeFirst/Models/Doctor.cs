@@ -9,8 +9,11 @@ public class Doctor
     [Key]
     public int Id { get; set; }
     [MaxLength(100)]
-    public string Name { get; set; } = string.Empty;
-    public int PublicationYear { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    [MaxLength(100)]
+    public string LastName { get; set; } = string.Empty;
+
+    public string Email { get; set; }
 
     public Prescription Prescription { get; set; } = null!;
 }

@@ -1,4 +1,5 @@
 using CodeFirst.Data;
+using CodeFirst.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -21,12 +22,40 @@ public class Dbservice : IDbservice
     {
         return await _context.Medicaments.Where(medicament => medicament.Id == idMedicament).AnyAsync();
     }
-
-    public async Task<bool> DoesPrescriptionHas10(int idPrescription)
+    
+    public int newIdforPatient()
     {
-        return _context.PrescriptionMedicaments
-            .Where(pm => pm.PrescriptionId == idPrescription)
-            .GroupBy(pm => pm.Prescription)
-            .Select(pm => pm.Count()).First() < 10;
+        return  _context.Patients.Select(patient => patient.Id).Max() + 1;
+    }
+    public int newIdforPerscription()
+    {
+        return _context.Prescriptions.Select(per => per.Id).Max() + 1;
+    }
+    public async Task AddnewPatient(Patient patient)
+    {
+        await _context.AddAsync(patient);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AddMedicamentPrescription(IEnumerable<PrescriptionMedicament> prescriptionMedicaments)
+    {
+        await _context.AddRangeAsync(prescriptionMedicaments);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AddPrescription(Prescription prescription)
+    {
+        await _context.AddAsync(prescription);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<Medicament?> getMedicament(int idMedicament)
+    {
+        return await _context.Medicaments.Where(medicament => medicament.Id == idMedicament).FirstOrDefaultAsync();
+    }
+
+    public async Task<Patient?> getPatient(int idPatient)
+    {
+        return await _context.Patients.Where(patient => patient.Id == idPatient).FirstOrDefaultAsync();
     }
 }
